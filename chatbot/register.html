@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Chatbot</title>
+    <link rel="stylesheet" href="auth.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <div class="auth-header">
+        <div class="logo">Persona Seek</div>
+    </div>
+    <div class="auth-main-content">
+        <div class="auth-box">
+            <h2 id="auth-title">Create Account</h2>
+            <div id="register-email-step">
+                <div class="input-group">
+                    <label for="register-email">Email address</label>
+                    <input type="email" id="register-email" required>
+                </div>
+            </div>
+
+            <div id="register-phone-step" class="hidden">
+                 <div class="input-group">
+                    <label for="register-country-code">Country/Region</label>
+                    <select id="register-country-code">
+                        <option value="+1">United States (+1)</option>
+                        <option value="+44">United Kingdom (+44)</option>
+                        <option value="+91" selected>India (+91)</option>
+                        <option value="+61">Australia (+61)</option>
+                        <option value="+49">Germany (+49)</option>
+                    </select>
+                </div>
+                 <div class="input-group">
+                    <label for="register-phone-number">Phone number</label>
+                    <input type="text" id="register-phone-number" placeholder="+91 " required>
+                </div>
+            </div>
+
+            <div id="registration-step" class="hidden">
+                 <div class="input-group displayed-email">
+                    <label>Email address</label>
+                    <div class="email-display">
+                        <span id="displayed-register-email"></span>
+                        <button class="edit-button" id="edit-register-email">Edit</button>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="register-password">Password</label>
+                     <div class="password-input-group">
+                        <input type="password" id="register-password" placeholder="Password" required>
+                        <i class='bx bx-hide password-toggle'></i>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="register-confirmPassword">Confirm Password</label>
+                     <div class="password-input-group">
+                        <input type="password" id="register-confirmPassword" placeholder="Confirm Password" required>
+                        <i class='bx bx-hide password-toggle'></i>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="continue-button" id="register-continue-button">Continue</button>
+            <p class="signup-link">Already have an account? <a href="login.html">Login</a></p>
+             <div class="or-separator">OR</div>
+             <div class="social-login">
+                <button class="social-button register-phone-button">
+                    <i class='bx bx-phone'></i> Continue with phone
+                </button>
+                 <button class="social-button register-email-button hidden">
+                    <i class='bx bx-envelope'></i> Continue with email
+                </button>
+                <button class="social-button google">
+                    <img src="https://img.icons8.com/color/16/000000/google-logo.png" alt="Google icon"> Continue with Google
+                </button>
+                <button class="social-button github">
+                    <img src="https://img.icons8.com/color/16/000000/github.png" alt="GitHub icon"> Continue with GitHub
+                </button>
+                <button class="social-button apple">
+                    <i class='bx bxl-apple'></i> Continue with Apple
+                </button>
+                </div>
+            </div>
+            <div class="footer-links">
+                <a href="#">Terms of Use</a> | <a href="#">Privacy Policy</a>
+            </div>
+        </div>
+    </div>
+    <script src="auth.js"></script>
+</body>
+</html> 

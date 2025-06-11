@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <link rel="stylesheet" href="search.css">
+    <!-- Boxicons CSS -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+    <div class="container">
+        <div class="sidebar sidebar-collapsed" id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-item toggle-button" id="sidebarCloseToggle">
+                    <!-- Toggle Icon to CLOSE Sidebar -->
+                    <i class='bx bx-x' ></i>
+                </div>
+                <div class="sidebar-item header-icon search-icon">
+                    <!-- Search Icon in Sidebar Header -->
+                    <i class='bx bx-search'></i>
+                </div>
+                <div class="sidebar-item header-icon edit-icon">
+                    <!-- Edit/New Chat Icon in Sidebar Header -->
+                    <i class='bx bx-edit-alt'></i>
+                </div>
+            </div>
+
+            <div class="sidebar-content">
+
+                <!-- Chat List / History -->
+                <div class="chat-history">
+                    <!-- Moved these items to the top of chat-history -->
+                    <div class="sidebar-item chat-item">
+                        <i class='bx bxl-creative-commons'></i><span>Persona Seek</span>
+                    </div>
+                    <div class="sidebar-item chat-item">
+                        <i class='bx bx-planet'></i><span>Discover</span>
+                    </div>
+                    <div class="sidebar-item chat-item">
+                        <i class='bx bx-book'></i><span>Library</span><span class="chat-count">6</span>
+                    </div>
+                    <div class="sidebar-item chat-item">
+                        <i class='bx bx-grid-alt'></i><span>Explore Persona</span>
+                    </div>
+
+                    <div class="history-section">
+                        <div class="history-header">Today</div>
+                        <div class="sidebar-item chat-item">
+                            <span>Sidebar toggle gap fix</span>
+                        </div>
+                        <div class="sidebar-item chat-item">
+                            <span>Front End Design Tips</span>
+                        </div>
+                    </div>
+                    <div class="history-section">
+                        <div class="history-header">Yesterday</div>
+                        <div class="sidebar-item chat-item">
+                            <span>Website Background Creation</span>
+                        </div>
+                        <div class="sidebar-item chat-item">
+                            <span>Working with JSON API</span>
+                        </div>
+                    </div>
+                    <div class="history-section">
+                        <div class="history-header">Previous 7 Days</div>
+                        <div class="sidebar-item chat-item">
+                            <span>C++ Page Update Tips</span>
+                        </div>
+                        <div class="sidebar-item chat-item">
+                            <span>HTML Header Creation</span>
+                        </div>
+                        <div class="sidebar-item chat-item">
+                            <span>C++ Help Request</span>
+                        </div>
+                        <div class="sidebar-item chat-item">
+                            <span>What are frameworks</span>
+                        </div>
+                        <div class="sidebar-item chat-item">
+                            <span>What are frameworks</span>
+                        </div>
+                        <div class="sidebar-item chat-item">
+                            <span>What are frameworks</span>
+                        </div>
+                        <div class="sidebar-item chat-item">
+                            <span>What are frameworks</span>
+                        </div>
+                        <div class="sidebar-item chat-item">
+                            <span>Multimodal Prompt Creation</span>
+                        </div>
+                        <div class="sidebar-item chat-item">
+                            <span>Web Development Internship</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="sidebar-footer">
+                <div class="sidebar-item upgrade-plan">
+                    <i class='bx bx-cube'></i><span>Upgrade plan</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content" id="mainContent">
+            <div class="header">
+                <div class="header-left">
+                    <!-- Icons visible when sidebar is collapsed -->
+                    <div class="header-item toggle-button" id="sidebarOpenToggle">
+                        <!-- Toggle Icon to OPEN Sidebar -->
+                        <i class='bx bx-menu'></i>
+                    </div>
+                    <div class="header-item edit-icon">
+                        <!-- Edit/New Chat Icon in Main Header (collapsed state) -->
+                        <i class='bx bx-edit-alt'></i>
+                    </div>
+                    <!-- Content for the left side of the header (e.g., ChatGPT logo, dropdown) - Always visible -->
+                    <div class="chat-info">
+                        <span>Persona Seek</span>
+                        <i class='bx bx-chevron-down'></i>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="temporary-button">
+                        <i class='bx bx-message-square-dots'></i>
+                        <span>Temporary</span>
+                    </div>
+                    <div class="sidebar-item profile header-profile" id="bottomProfile">
+                        <!-- Profile Icon (Moved to Header) -->
+                        <i class='bx bx-user'></i>
+                    </div>
+                    <!-- Profile Menu -->
+                    <div class="profile-menu" id="profileMenu">
+                        <div class="menu-item email">
+                            <span>uniquechoudhary1@gmail.com</span><i class='bx bx-plus'></i>
+                        </div>
+                        <div class="menu-item">
+                            <i class='bx bx-chat'></i><span>Chat</span>
+                        </div>
+                        <div class="menu-item">
+                            <i class='bx bx-credit-card'></i><span>Subscription</span>
+                        </div>
+                        <div class="menu-item">
+                            <i class='bx bx-sync'></i><span>Updates</span>
+                        </div>
+                        <div class="menu-item">
+                            <i class='bx bx-cog'></i><span>Settings</span>
+                        </div>
+                        <div class="menu-item">
+                            <i class='bx bx-sun'></i><span>Change theme</span>
+                        </div>
+                        <div class="menu-item">
+                            <i class='bx bx-log-out'></i><span>Logout</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Search Results Area -->
+            <div class="search-results-area">
+                <h1>hilton</h1>
+                 <div class="results-header">
+                      <h2><i class='bx bx-spark'></i> Answer</h2>
+                      <h2><i class='bx bx-link-external'></i> Sources · <span class="source-count">6</span></h2>
+                      <h2><i class='bx bx-user'></i> Profiles</h2>
+                     <h2><i class='bx bx-image'></i> Images</h2>
+                      <h2><i class='bx bx-list-ul'></i> Tasks</h2>
+                 </div>
+                 <div class="results-content">
+                     <div class="answer-link">
+                         <a href="#">Hotels by Hilton - Book the Best Rates Across All Brands</a>
+                         <p>Ways to stay with Hilton · Waldorf Astoria. Offers unforgettable experiences at iconic destinations around the...</p>
+                         <a href="#"><i class='bx bx-globe'></i> hilton.com</a>
+                     </div>
+                     <div class="image-gallery">
+                        <img src="https://images.app.goo.gl/1Hhh67o5bUw54Q9J7" alt="Hilton Hotel Lobby">
+                        <img src="https://images.unsplash.com/photo-1560347876-aeef00ee58a1" alt="Hilton Hotel Exterior">
+                        <img src="https://images.app.goo.gl/JoniWGW8MW79ubgS9" alt="Hilton Hotel Poolside">
+                    </div>
+                     <div class="answer-section">
+                         <h3>Overview of Hilton</h3>
+                         <p>Hilton is one of the world's leading hospitality companies, known for its extensive portfolio of hotels, resorts, and vacation ownership properties. The company operates globally and is recognized for its innovation, historical significance, and broad range of brands catering to different market segments.</p>
+                     </div>
+                     <div class="founding-growth-section">
+                         <h4>Founding and Growth</h4>
+                         <ul>
+                             <li>Founded in 1919 by Conrad Nicholson Hilton, Hilton began with the purchase of the Mobley Hotel in Cisco, Texas.</li>
+                             <li>The first hotel to bear the Hilton name was the Dallas Hilton, opened in 1925.</li>
+                             <li>Hilton pioneered several industry innovations, including the first central reservations office and the concept of airport hotels.</li>
+                         </ul>
+                     </div>
+                     <div class="corporate-structure-section">
+                         <h4>Corporate Structure and Brands</h4>
+                         <ul>
+                             <li>Hilton Worldwide Holdings Inc. is the parent company, headquartered in Tysons, Virginia, United States.</li>
+                             <li>As of December 31, 2023, Hilton's portfolio includes 7,530 properties with 1,182,937 rooms across 118 countries and territories.</li>
+                             <li>The company owns, manages, and franchises properties under 22 distinct brands, such as Waldorf Astoria, Conrad, DoubleTree, Embassy Suites, Hilton Garden Inn, Hampton by Hilton, and more.</li>
+                             <li>Hilton Grand Vacations is the company's vacation ownership (timeshare) arm.</li>
+                         </ul>
+                     </div>
+                     <div class="hotels-resorts-section">
+                         <h4>Hilton Hotels & Resorts</h4>
+                         <ul>
+                             <li>Hilton Hotels & Resorts is the flagship full-service brand, with over 600 properties worldwide as of 2023.</li>
+                             <li>The brand targets both business and leisure travelers, with locations in city centers, near airports, convention centers, and popular vacation destinations.</li>
+                         </ul>
+                     </div>
+                     <!-- Add Vacation Ownership section -->
+                     <div class="vacation-ownership-section">
+                        <h3>Vacation Ownership</h3>
+                        <p>Hilton Grand Vacations offers timeshare and vacation ownership options, allowing guests to explore destinations through Hilton's network of resorts <sup>5</sup>.</p>
+                     </div>
+                     <!-- Add Summary Table: Key Facts -->
+                     <div class="summary-table-section">
+                         <h3>Summary Table: Key Facts</h3>
+                         <table>
+                            <thead>
+                                <tr>
+                                    <th>Aspect</th>
+                                    <th>Details</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Founded</td>
+                                    <td>1919 by Conrad Hilton</td>
+                                </tr>
+                                <tr>
+                                    <td>Headquarters</td>
+                                    <td>Tysons, Virginia, U.S.</td>
+                                </tr>
+                                <tr>
+                                    <td>Number of Properties</td>
+                                    <td>7,530 (as of 2023, all brands)</td>
+                                </tr>
+                                <tr>
+                                    <td>Number of Rooms</td>
+                                    <td>1,182,937 (as of 2023)</td>
+                                </tr>
+                                <tr>
+                                    <td>Global Presence</td>
+                                    <td>118 countries and territories</td>
+                                </tr>
+                                <tr>
+                                    <td>Flagship Brand</td>
+                                    <td>Hilton Hotels & Resorts</td>
+                                </tr>
+                                <tr>
+                                    <td>Loyalty Program</td>
+                                    <td>Hilton Honors</td>
+                                </tr>
+                                <tr>
+                                    <td>Notable Innovations</td>
+                                    <td>Central reservations, airport hotels, loyalty program</td>
+                                </tr>
+                                <tr>
+                                    <td>Recent Acquisitions</td>
+                                    <td>Sydell Group (NoMad Hotels), Small Luxury Hotels partnership (2024)</td>
+                                </tr>
+                            </tbody>
+                         </table>
+                     </div>
+                     <!-- More sections can be added here -->
+                 </div>
+             </div>
+             <!-- Chat Area -->
+            <div class="chat-area">
+                <!-- Chat messages and input goes here -->
+                <div class="input-area">
+                    <div id="selectedFilesContainer" class="selected-files-container">
+                        <!-- File names will be added here by JavaScript -->
+                    </div>
+                    <div id="speechError" class="speech-error" style="color: red; margin-bottom: 10px;"></div>
+                    <div class="input-top">
+                        <button class="input-button" id="attachFileButton" data-tooltip="Add photos and files"><i
+                                class='bx bx-plus'></i></button>
+                        <textarea placeholder="Ask anything"></textarea>
+                        <span class="purple-dot"></span>
+                    </div>
+                    <div class="input-bottom">
+                        <div class="input-buttons-left">
+                            <button class="input-button" data-tooltip="Search"><i class='bx bx-globe'></i>
+                                Search</button>
+                            <button class="input-button" data-tooltip="Reason"><i class='bx bx-bulb'></i>
+                                Reason</button>
+                            <button class="input-button" data-tooltip="Deep research"><i class='bx bx-telescope'></i>
+                                Deep research</button>
+                            <button class="input-button" data-tooltip="Create image"><i class='bx bx-paint'></i> Create
+                                image</button>
+                            <button class="input-button" data-tooltip="More options"><i
+                                    class='bx bx-dots-horizontal-rounded'></i></button>
+                        </div>
+                        <div class="input-buttons-right">
+                            <button class="input-button" id="micButton" data-tooltip="Voice input"><i
+                                    class='bx bx-microphone'></i></button>
+                            <a href="search.html">
+                                <button class="input-button black" data-tooltip="Send message"><i
+                                        class='bx bx-bar-chart-alt-2'></i></button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <a href="#">Pro</a>
+                <a href="#">Enterprise</a>
+                <a href="#">API</a>
+                <a href="#">Blog</a>
+                <a href="#">Privacy</a>
+                <a href="#">Careers</a>
+                <a href="#">Store</a>
+                <a href="#">Finance</a>
+                <a href="#">English <i class='bx bx-chevron-down'></i></a>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

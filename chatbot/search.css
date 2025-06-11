@@ -1,0 +1,840 @@
+/* Search Results Area Styles */
+body {
+    margin: 0;
+    font-family: sans-serif;
+    background-color: #f0f0f0;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.sidebar {
+    width: 250px; /* Expanded width */
+    background-color: #ffffff;
+    color: #555;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    border-right: 1px solid #ddd;
+    transition: width 0.3s ease, padding 0.3s ease, border-right 0.3s ease; /* Smooth transitions */
+    box-sizing: border-box;
+}
+
+
+.sidebar.sidebar-collapsed {
+    width: 0;
+}
+
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    padding: 8px 10px;
+    margin-bottom: 5px;
+}
+
+.sidebar.sidebar-collapsed .sidebar-header {
+     display: none;
+}
+
+
+.sidebar-item {
+    margin: 0;
+    text-align: center;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 6px 10px;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.sidebar-item:hover {
+    background-color: #934ffe;
+    color: white;
+}
+
+
+.sidebar-item i {
+    font-size: 1.4em;
+    margin-right: 10px;
+    color: #777;
+}
+
+.sidebar-item span {
+    font-size: 0.9em;
+    color: #555;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+/* Specific Sidebar Header Items */
+.sidebar-header .sidebar-item {
+    padding: 4px 5px;
+    margin: 0 4px;
+}
+
+.sidebar-header .toggle-button {
+     font-size: 1.6em;
+     margin-right: 10px;
+}
+
+.sidebar-header .header-icon {
+    font-size: 1.4em;
+     margin-right: 8px;
+}
+
+
+.sidebar-content {
+    flex-grow: 1;
+    padding: 0 10px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar.sidebar-collapsed .sidebar-content {
+     display: none;
+}
+
+
+.add-button {
+    background-color: #f0f0f0;
+    color: #555;
+    padding: 8px 15px;
+    border-radius: 20px;
+    margin: 10px 0;
+    justify-content: center;
+     width: calc(100% - 30px);
+     box-sizing: border-box;
+}
+
+.add-button:hover {
+    background-color: #934ffe;
+    color: white;
+}
+
+
+.add-button i {
+    margin-right: 8px;
+}
+
+/* Added style for the new container */
+.initial-chat-items {
+    margin-bottom: 15px; /* Add space below the initial chat items */
+}
+
+
+.chat-history {
+     flex-grow: 1;
+     overflow-y: auto;
+     padding-right: 5px;
+}
+
+/* Style for the scrollbar (optional) */
+.chat-history::-webkit-scrollbar {
+  width: 8px;
+}
+
+.chat-history::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.chat-history::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.chat-history::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+
+.history-section {
+     margin-bottom: 15px;
+     margin-top: 10px;
+}
+
+.chat-history .history-section:first-child {
+    margin-top: 0;
+}
+
+
+.history-header {
+     font-size: 0.8em;
+     color: #777;
+     margin-bottom: 5px;
+     padding: 0 10px;
+}
+
+.chat-item {
+     margin-bottom: 5px;
+     border-radius: 5px;
+}
+
+.chat-item:hover {
+    background-color: #934ffe;
+    color: white;
+}
+
+.chat-item .chat-count {
+    margin-left: auto;
+    font-size: 0.8em;
+    color: #777;
+}
+
+.chat-item i {
+     font-size: 1.2em;
+     margin-right: 8px;
+}
+
+
+.sidebar-footer {
+    padding: 10px;
+    border-top: 1px solid #eee;
+    background-color: #ffffff;
+    z-index: 1000;
+    margin-top: auto;
+}
+
+.upgrade-plan {
+    justify-content: flex-start;
+    font-weight: bold;
+    color: #333;
+    padding: 8px 10px;
+    border-radius: 5px;
+}
+
+.upgrade-plan:hover {
+    background-color: #934ffe;
+    color: white;
+}
+
+
+.upgrade-plan i {
+    font-size: 1.4em;
+    margin-right: 10px;
+}
+
+.upgrade-plan small {
+     display: block;
+     font-size: 0.7em;
+     color: #777;
+     margin-top: 2px;
+}
+
+
+.main-content {
+    flex-grow: 1;
+    background-color: #ffffff;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    transition: margin-left 0.3s ease;
+    margin-left: 0;
+    height: 100vh;
+    padding-bottom: 60px; /* Add padding to make space for the fixed footer */
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #ddd;
+    color: #333;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.header-left .header-item {
+     transition: opacity 0.3s ease, width 0.3s ease, margin-right 0.3s ease;
+}
+
+.sidebar:not(.sidebar-collapsed) ~ .main-content .header-left .header-item.toggle-button,
+.sidebar:not(.sidebar-collapsed) ~ .main-content .header-left .header-item.edit-icon {
+     opacity: 0;
+     width: 0;
+     margin-right: 0;
+     pointer-events: none;
+}
+
+
+.header-item {
+     margin-right: 15px;
+     cursor: pointer;
+     display: flex;
+     align-items: center;
+}
+
+.header-item i {
+    font-size: 1.5em;
+    color: #777;
+     margin-right: 5px;
+}
+
+.header-item span {
+     font-size: 1em;
+     color: #333;
+}
+
+
+.chat-info {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    margin-right: 0;
+}
+
+.chat-info i {
+    margin-left: 5px;
+}
+
+
+.header-right {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.temporary-button {
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    margin-right: 15px;
+    cursor: pointer;
+    color: #555;
+}
+
+.temporary-button:hover {
+    background-color: #934ffe;
+    color: white;
+}
+
+.temporary-button i {
+    margin-right: 5px;
+    color: #777;
+}
+
+
+.chat-area {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.chat-area h2 {
+    margin-bottom: 20px; 
+    text-align: center;
+}
+
+.input-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 25px;
+    padding: 8px 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 800px;
+}
+
+.input-top {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px; 
+}
+
+.input-bottom {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between; /* Space out left and right groups */
+    flex-wrap: wrap; /* Allow buttons to wrap if needed */
+}
+
+.input-buttons-left {
+    display: flex;
+    align-items: center;
+}
+
+.input-buttons-right {
+    display: flex;
+    align-items: center;
+}
+
+.input-area textarea {
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    padding: 5px;
+    font-size: 1em;
+    resize: none; /* Prevent manual resizing */
+    min-height: 20px; /* Adjust as needed */
+    overflow-y: auto; /* Add scrollbar if content exceeds height */
+}
+
+
+.input-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px 8px;
+    display: flex;
+    align-items: center;
+    color: #555;
+    font-size: 1em;
+}
+
+.input-button i {
+    margin-right: 5px;
+    font-size: 1.2em;
+}
+
+.input-button:hover {
+    color: #000;
+}
+
+.input-button.black {
+    background-color: #000;
+    color: #fff;
+    border-radius: 20px;
+    padding: 5px 15px;
+}
+
+.input-button.black i {
+    color: #fff;
+}
+
+.input-button#micButton.listening i {
+    color: red; 
+}
+
+.purple-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #8a2be2; /* Purple color */
+    border-radius: 50%;
+    margin-left: 10px;
+}
+
+/* Profile Menu Styling */
+.profile-menu {
+    display: none;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background-color: #ffffff;
+    color: #333;
+    border-radius: 8px;
+    padding: 10px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1001;
+    min-width: 200px;
+    border: 1px solid #ddd;
+}
+
+.profile-menu .menu-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.profile-menu .menu-item:hover {
+    background-color: #934ffe;
+    color: white;
+}
+
+.profile-menu .menu-item i {
+    font-size: 1.2em;
+    margin-right: 10px;
+    margin-bottom: 0;
+    color: #777;
+}
+
+.profile-menu .menu-item span {
+    font-size: 1em;
+}
+
+.profile-menu .email {
+    justify-content: space-between;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.profile-menu .email i {
+    font-size: 1em;
+    margin-right: 0;
+    color: #777;
+}
+
+.selected-files-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.selected-file {
+    display: flex;
+    align-items: center;
+    background-color: #e0e0e0;
+    border-radius: 20px;
+    padding: 5px 10px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    font-size: 0.9em;
+}
+
+.selected-file i {
+    margin-right: 5px;
+    font-size: 1em;
+}
+
+.selected-file .file-name {
+    margin-right: 5px;
+}
+
+.selected-file .remove-file-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    font-size: 1em;
+    color: #555;
+}
+
+.selected-file .remove-file-button:hover {
+    color: #934ffe;
+}
+
+/* Tooltip Styles */
+[data-tooltip] {
+    position: relative;
+    cursor: pointer;
+}
+
+[data-tooltip]::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 125%; /* Position above the button */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #000;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    white-space: nowrap;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    z-index: 999;
+}
+
+[data-tooltip]:hover::before {
+    visibility: visible;
+    opacity: 1;
+}
+
+[data-tooltip]::after {
+    content: '';
+    position: absolute;
+    bottom: 115%; /* Position the arrow below the tooltip text */
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    border-width: 5px;
+    border-style: solid;
+    border-color: #000 transparent transparent transparent;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    z-index: 999;
+}
+
+[data-tooltip]:hover::after {
+    visibility: visible;
+    opacity: 1;
+}
+
+.search-results-area {
+    flex-grow: 1;
+    padding: 0 20px 20px 20px; /* Adjust padding top to reduce space after header/heading */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+}
+
+.results-header {
+    display: flex;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 20px; /* Keep space below buttons */
+    justify-content: flex-start;
+    width: 100%; /* Ensure header takes full width to align content below */
+    max-width: 800px; /* Limit max width to match results-content */
+    padding-bottom: 10px; /* Space below buttons and the line */
+}
+
+.results-header h2 {
+    margin: 0 15px 0 0; /* Adjust margin between buttons */
+    padding: 4px 8px; /* Further reduce padding */
+    cursor: pointer;
+    color: #555;
+    font-size: 0.9em; /* Further reduce font size */
+    border-radius: 15px; /* Adjust border radius */
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.results-header h2 i {
+    font-size: 1em; /* Adjust icon size */
+    margin-right: 5px; /* Adjust space between icon and text */
+}
+
+.results-header h2:hover {
+    background-color: #934ffe;
+    color: white;
+}
+
+.results-header h2:first-child {
+    border-bottom: none;
+    background-color: #e0e0e0;
+    color: #000;
+    font-weight: normal; /* Remove bold from active tab */
+}
+
+.results-header h2:first-child:hover {
+     background-color: #e0e0e0;
+     color: #000;
+}
+
+.results-content {
+    width: 100%; /* Ensure content takes full width */
+    max-width: 800px; /* Maintain max-width for content block */
+    text-align: left; /* Align text content to the left */
+}
+
+.answer-link {
+    margin-bottom: 20px;
+}
+
+.answer-link a {
+    color: #1a0dab;
+    text-decoration: none;
+    font-size: 1.1em;
+}
+
+.answer-link a:hover {
+    color: #934ffe;
+}
+
+.answer-link p {
+    margin: 5px 0;
+    color: #545454;
+    font-size: 0.9em; /* Adjust description font size */
+}
+
+.answer-link a i {
+    font-size: 1em;
+    margin-right: 5px;
+    color: #545454;
+}
+
+.answer-section,
+.images-section,
+.founding-growth-section,
+.corporate-structure-section,
+.hotels-resorts-section {
+    margin-bottom: 20px;
+    width: 100%; /* Ensure sections take full width within results-content */
+}
+
+.answer-section h3,
+.founding-growth-section h4,
+.corporate-structure-section h4,
+.hotels-resorts-section h4 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.1em; /* Adjust heading font size */
+    color: #333; /* Ensure heading color is dark */
+}
+
+.images-section h4 {
+     margin-top: 0;
+     margin-bottom: 10px;
+     font-size: 1.1em; /* Adjust heading font size */
+    color: #333; /* Ensure heading color is dark */
+}
+
+.answer-section p,
+.founding-growth-section ul,
+.corporate-structure-section ul,
+.hotels-resorts-section ul {
+    font-size: 0.9em; /* Adjust paragraph and list item font size */
+    line-height: 1.5; /* Adjust line height for readability */
+}
+
+.founding-growth-section ul,
+.corporate-structure-section ul,
+.hotels-resorts-section ul {
+    padding-left: 20px; /* Add padding for list bullets */
+}
+
+.founding-growth-section li,
+.corporate-structure-section li,
+.hotels-resorts-section li {
+    margin-bottom: 5px; /* Space between list items */
+}
+
+.image-gallery {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+    margin-bottom: 20px; /* Space below image gallery */
+}
+
+.image-gallery img {
+    width: 180px; /* Adjust image width to be slightly larger */
+    height: 120px; /* Adjust image height */
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* Tooltip Styles */
+[data-tooltip] {
+    position: relative;
+    cursor: pointer;
+}
+
+[data-tooltip]::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 125%; /* Position above the button */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #000;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    white-space: nowrap;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    z-index: 999;
+}
+
+[data-tooltip]:hover::before {
+    visibility: visible;
+    opacity: 1;
+}
+
+[data-tooltip]::after {
+    content: '';
+    position: absolute;
+    bottom: 115%; /* Position the arrow below the tooltip text */
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    border-width: 5px;
+    border-style: solid;
+    border-color: #000 transparent transparent transparent;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    z-index: 999;
+}
+
+[data-tooltip]:hover::after {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Add style for the main heading */
+.main-content h1 {
+    font-size: 1.8em; /* Adjust font size to match image */
+    margin-bottom: 10px; /* Reduce space below the heading */
+    width: 100%; /* Ensure it takes full width up to max-width */
+    max-width: 800px; /* Limit max width to match results-content */
+    color: #333; /* Ensure color is dark like the image */
+}
+
+/* Styles for the Summary Table */
+.summary-table-section table {
+    width: 100%;
+    border-collapse: collapse; /* Collapse borders to avoid double lines */
+    margin-top: 15px; /* Add some space above the table */
+    border: 1px solid #ddd; /* Add a border around the table */
+}
+
+.summary-table-section th,
+.summary-table-section td {
+    border: 1px solid #ddd; /* Add borders to table cells */
+    padding: 10px; /* Add some padding inside cells */
+    text-align: left; /* Align text to the left */
+}
+
+.summary-table-section th {
+    background-color: #f9f9f9; /* Slightly different background for header */
+    font-weight: bold; /* Keep header bold */
+}
+
+.summary-table-section td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.summary-table-section tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.summary-table-section th {
+    text-align: left;
+    background-color: #e9e9e9;
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 20px;
+    border-top: 1px solid #ddd;
+    background-color: #ffffff;
+    flex-wrap: wrap;
+    margin-top: auto;
+}
+
+.footer a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #555;
+    font-size: 0.9em;
+}
+
+.footer a:hover {
+    color: #934ffe;
+}
+
+.footer i {
+    font-size: 0.9em;
+}

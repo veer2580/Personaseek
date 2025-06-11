@@ -1,0 +1,156 @@
+/* General Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9fafb; /* Light background color */
+    color: #333;
+    line-height: 1.6;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Header Styles */
+.site-header {
+    background-color: #ffffff;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 15px 0;
+}
+
+.header-container {
+    max-width: 1000px; /* Adjust as needed */
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #007B85;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+
+.logo:hover {
+    opacity: 0.8;
+    color: #934ffe;
+}
+
+.logo-img {
+    height: 40px;
+    width: auto;
+}
+
+.logo-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.site-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.site-nav li {
+    margin-left: 25px; /* Space between nav items */
+}
+
+.site-nav a {
+    font-size: 1em;
+    color: #555;
+    transition: color 0.3s ease;
+}
+
+.site-nav a:hover {
+    color: #934ffe;
+}
+
+.try-button {
+    background-color: #007B85; /* Teal button color */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.try-button:hover {
+    background-color: #934ffe;
+}
+
+/* Main Content Styles */
+.privacy-content {
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.content-container {
+    max-width: 750px; /* Content width like in the image */
+    width: 100%;
+    text-align: left;
+}
+
+.privacy-content h1 {
+    font-family: 'Merriweather', serif;
+    font-size: 2.2em;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.privacy-content .last-updated {
+    font-size: 0.9em;
+    color: #777;
+    margin-bottom: 30px;
+}
+
+.privacy-content p {
+    margin-bottom: 20px;
+    color: #555;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .site-nav ul {
+        flex-direction: column;
+        margin-top: 15px;
+    }
+
+    .site-nav li {
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
+
+    .try-button {
+        margin-top: 15px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .content-container {
+        padding: 0 10px;
+    }
+
+    .privacy-content h1 {
+        font-size: 1.8em;
+    }
+} 

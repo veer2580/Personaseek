@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Persona Seek</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="threads.css">
+    <!-- Boxicons CSS -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+    <div class="threads-container" id="threadsContainer"></div>
+    <div class="container">
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header-perplexity">
+                <a href="index.html" class="logo-perplexity">
+                    <img src="WhatsApp_Image_2025-05-21_at_3.22.49_PM-removebg-preview (1).png" alt="Persona Seek Logo"
+                        class="logo-img-perplexity">
+                </a>
+                <div class="new-chat-button" id="sidebarAttachFileButton">
+                    <i class='bx bx-plus'></i>
+                </div>
+            </div>
+
+            <div class="sidebar-content-perplexity">
+                <ul class="sidebar-nav-list">
+                    <li><a href="index.html"><i class='bx bx-home'></i><span>Home</span></a></li>
+                    <li><a href="#"><i class='bx bx-compass'></i><span>Discover</span></a></li>
+                    <li><a href="#"><i class='bx bx-layer'></i><span>Spaces</span></a></li>
+                </ul>
+                <!-- Chat List / History -->
+                <div class="chat-history">
+                    <!-- You can populate this with dynamic chat history items -->
+                    <!-- Example placeholder items: -->
+                    <!-- <div class="history-item">Chat about AI</div> -->
+                    <!-- <div class="history-item">Project X</div> -->
+                </div>
+            </div>
+            <div class="footer-item-perplexity account">
+                <a href="#"><i class='bx bx-user'></i><span>Account</span></a>
+            </div>
+            <div class="footer-item-perplexity">
+                <a href="pro.html"><i class='bx bx-rocket'></i><span>Upgrade</span></a>
+            </div>
+            <div class="footer-item-perplexity">
+                <a href="#"><i class='bx bx-download'></i><span>Install</span></a>
+            </div>
+        </div>
+
+        <div class="main-content" id="mainContent">
+            <div class="chat-area">
+                <!-- Chat messages and input goes here -->
+                <div class="logo-container">
+                    <div class="logo-3d">
+                        <img src="logo.png" alt="3D Logo">
+                    </div>
+                </div>
+                <h1>Persona Seek</h1>
+                <div class="input-area">
+                    <div id="selectedFilesContainer" class="selected-files-container">
+                        <!-- File names will be added here by JavaScript -->
+                    </div>
+                    <div id="speechError" class="speech-error" style="color: red; margin-bottom: 10px;"></div>
+                    <div class="input-top">
+                        <button class="input-button" id="attachFileButton" data-tooltip="Add photos and files"><i
+                                class='bx bx-plus'></i></button>
+                        <textarea placeholder="What can I help you with?"></textarea>
+                        <span class="purple-dot"></span>
+                    </div>
+                    <div class="input-bottom">
+                        <div class="input-buttons-left">
+                            <button class="input-button" data-tooltip="Search"><i class='bx bx-globe'></i> Search</button>
+                            <button class="input-button" data-tooltip="Reason"><i class='bx bx-bulb'></i> Reason</button>
+                            <button class="input-button" data-tooltip="Deep research"><i class='bx bx-telescope'></i> Deep
+                                research</button>
+                            <button class="input-button" data-tooltip="Create image"><i class='bx bx-paint'></i> Create
+                                image</button>
+                            <button class="input-button" data-tooltip="More options"><i
+                                    class='bx bx-dots-horizontal-rounded'></i></button>
+                        </div>
+                        <div class="input-buttons-right">
+                            <button class="input-button" id="micButton" data-tooltip="Voice input"><i
+                                    class='bx bx-microphone'></i></button>
+                            <a href="search.html">
+                                <button class="input-button black" data-tooltip="Send message"><i
+                                        class='bx bx-bar-chart-alt-2'></i></button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- The footer is positioned by CSS outside the main container flex -->
+    <div class="footer">
+        <a href="pro.html">Pro</a>
+        <a href="#">Enterprise</a>
+        <a href="#">API</a>
+        <a href="blog.html">Blog</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="#">Careers</a>
+        <a href="news.html">News</a>
+        <a href="#">English <i class='bx bx-chevron-down'></i></a>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="threads.js"></script>
+    <input type="file" id="fileInput" style="display: none;" multiple accept="*/*">
+    
+    <script>
+        const h1 = document.querySelector('.chat-area h1');
+        setTimeout(() => {
+            h1.classList.add('typed');
+        }, 3000); // Match this to the animation duration
+
+        // Initialize threads effect
+        const threadsContainer = document.getElementById('threadsContainer');
+        new Threads(threadsContainer, {
+            color: [1.0, 1.0, 1.0], // White color
+            amplitude: 1.5,
+            distance: 0.2,
+            enableMouseInteraction: true
+        });
+    </script>
+</body>
+
+</html>
