@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celebso Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: -apple--system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            background-color: #f3f2ef;
+        }
+
+        .header {
+            background-color: #ffffff;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 52px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            max-width: 1128px;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            margin-right: auto;
+            margin-left: 10px; 
+        }
+
+        .header-logo img {
+            height: 32px;
+            margin-right: 10px; 
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background-color: #eef3f8;
+            border-radius: 4px;
+            padding: 5px 10px;
+            width: 280px;
+        }
+
+        .search-bar i {
+            color: #666;
+            margin-right: 8px;
+        }
+
+        .search-bar input {
+            border: none;
+            background: none;
+            outline: none;
+            font-size: 14px;
+            width: 100%;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-list {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-item {
+            margin-left: 20px;
+            position: relative;
+        }
+
+        .nav-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #666;
+            font-size: 12px;
+            padding: 6px 0;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link i {
+            font-size: 20px;
+            margin-bottom: 4px;
+        }
+
+        .nav-link:hover {
+            color: #F4BE13;
+        }
+
+        .nav-item.active .nav-link {
+            color: #F4BE13;
+        }
+
+        .nav-item.active .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: #F4BE13;
+        }
+
+        .divider {
+            width: 1px;
+            height: 24px;
+            background-color: #e0e0e0;
+            margin: 0 20px;
+        }
+
+
+        main {
+            padding-top: 72px;
+            padding-left: 20px;
+            padding-right: 20px;
+            max-width: 1128px;
+            margin: 0 auto;
+        }
+
+        /* Placeholder for main content */
+        .dashboard-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Styles for the new user profile in header */
+        .header-user-profile .nav-link {
+            flex-direction: row-reverse; 
+            align-items: center;
+            padding: 0.5rem 0;
+            margin: 0 20px; 
+        }
+
+        .user-profile-img {
+            width: 28px;
+            /* Adjust size as needed */
+            height: 28px;
+            border-radius: 50%;
+            /* Make it circular */
+            margin-left: 8px; /* Space between image and text (now on the right) */
+        }
+
+        .user-profile-text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .user-profile-text span:first-child {
+            font-size: 14px;
+            /* Name font size */
+            font-weight: 600;
+            color: #333;
+        }
+
+        .user-profile-text span:last-child {
+            font-size: 10px;
+            /* Title font size */
+            color: #666;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr; /* Three columns: left, middle (wider), right */
+            grid-template-rows: repeat(4, auto); /* Four rows for the left column items */
+            gap: 15px; /* Gap between grid items */
+            max-width: 1128px;
+            margin: 20px auto; /* Center the grid and add space below header */
+            padding: 0 20px; /* Add padding on the sides */
+        }
+
+        .grid-item {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+            padding: 20px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .div1 {
+            grid-column: 1 / 2;
+            grid-row: 1 / 2;
+        }
+
+        .div2 {
+            grid-column: 2 / 3;
+            grid-row: 1 / 5; /* Span all four rows */
+            overflow-y: auto; /* Make this section vertically scrollable */
+        }
+
+        .div3 {
+            grid-column: 3 / 4;
+            grid-row: 1 / 2;
+        }
+
+        .div4 {
+            grid-column: 1 / 2;
+            grid-row: 2 / 3;
+        }
+
+        .div5 {
+            grid-column: 1 / 2;
+            grid-row: 3 / 4;
+        }
+
+        .div6 {
+            grid-column: 1 / 2;
+            grid-row: 4 / 5;
+        }
+
+        .div8,
+        .div9 {
+            grid-column: 3 / 4;
+            background-color: #e0e0e0; /* Grey background */
+            border-radius: 8px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2em; /* Size of the plus sign */
+            color: #666; /* Color of the plus sign */
+            border: 1px solid #ccc;
+        }
+
+        .div8 {
+            grid-row: 2 / 3;
+        }
+
+        .div9 {
+            grid-row: 3 / 4;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="header-left">
+                <div class="header-logo">
+                    <img src="logo.png" alt="Celebso Logo"> 
+                </div>
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search">
+                </div>
+            </div>
+            <div class="header-right">
+                <ul class="nav-list">
+                    <li class="nav-item active">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-home"></i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-user-friends"></i>
+                            <span>Connections</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-briefcase"></i>
+                            <span>Celebso Live</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-comment-dots"></i>
+                            <span>Messaging</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-bell"></i>
+                            <span>Notifications</span>
+                        </a>
+                    </li>
+                    <li class="nav-item header-user-profile">
+                        <a href="#" class="nav-link">
+                            <img src="https://i.pravatar.cc/150?img=68" alt="User Profile" class="user-profile-img">
+                            <div class="user-profile-text">
+                                <span>Rohit Choudhary</span>
+                                <span>Entrepreneur</span>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="dashboard-grid">
+            <div class="grid-item div1">
+                <h3>Online People</h3>
+                <p>List of online users will go here.</p>
+                <!-- Content for Section 1 -->
+            </div>
+            <div class="grid-item div4">
+                <h3>My Profile</h3>
+                <p>User profile summary will go here.</p>
+                <!-- Content for Section 4 -->
+            </div>
+            <div class="grid-item div5">
+                <h3>Section 5</h3>
+                <p>Content for section 5 will go here.</p>
+                <!-- Content for Section 5 -->
+            </div>
+            <div class="grid-item div6">
+                <h3>Section 6</h3>
+                <p>Content for section 6 will go here.</p>
+                <!-- Content for Section 6 -->
+            </div>
+            <div class="grid-item div2">
+                <h3>Feed</h3>
+                <p>User feed with various posts will go here.</p>
+                <!-- Content for Section 2 -->
+            </div>
+            <div class="grid-item div3">
+                <h3>People to Connect</h3>
+                <p>Suggestions for people to connect with will go here.</p>
+                <!-- Content for Section 3 -->
+            </div>
+            <div class="grid-item div8">
+                +
+            </div>
+            <div class="grid-item div9">
+                +
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

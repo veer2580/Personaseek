@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Celebso</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .auth-container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 2.5rem;
+            background: var(--primary-color);
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            transform: translateY(0);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .auth-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .auth-container h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--text-color);
+            font-size: 2rem;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .auth-container h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
+            border-radius: 2px;
+        }
+
+        .form-group {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            border: 2px solid #e1e1e1;
+            border-radius: 10px;
+            background: var(--primary-color);
+            color: var(--text-color);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            border-color: var(--primary-btn);
+            box-shadow: 0 0 0 3px rgba(244, 190, 19, 0.1);
+            outline: none;
+        }
+
+        .form-group i {
+            position: absolute;
+            left: 1rem;
+            top: 2.5rem;
+            color: #666;
+            transition: color 0.3s ease;
+        }
+
+        .form-group input:focus + i {
+            color: var(--primary-btn);
+        }
+
+        .primary-btn {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(45deg, var(--primary-btn), #fcd142);
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(244, 190, 19, 0.3);
+        }
+
+        .primary-btn:active {
+            transform: translateY(0);
+        }
+
+        .auth-links {
+            text-align: center;
+            margin-top: 2rem;
+            color: var(--text-color);
+        }
+
+        .auth-links a {
+            color: var(--primary-btn);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .auth-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-btn);
+            transition: width 0.3s ease;
+        }
+
+        .auth-links a:hover::after {
+            width: 100%;
+        }
+
+        .password-requirements {
+            margin-top: 0.5rem;
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .password-requirements ul {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 0.5rem;
+        }
+
+        .password-requirements li {
+            margin-bottom: 0.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .password-requirements li i {
+            font-size: 0.8rem;
+        }
+
+        .password-requirements li.valid {
+            color: #28a745;
+        }
+
+        .password-requirements li.invalid {
+            color: #dc3545;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .auth-container {
+            animation: fadeIn 0.5s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo-container">
+            <a href="index.html" class="logo">
+                <img src="logo.png" alt="Celebso Logo">
+            </a>
+        </div>
+    </header>
+
+    <div class="main-content" style="height: 100vh; padding-top: 100px;">
+        <div class="auth-container">
+            <h2>Create Account</h2>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" name="fullName" required placeholder="Enter your full name">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required placeholder="Enter your email">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required placeholder="Create a password">
+                    <i class="fas fa-lock"></i>
+                    <div class="password-requirements">
+                        <ul>
+                            <li class="invalid" id="length"><i class="fas fa-circle"></i> At least 8 characters</li>
+                            <li class="invalid" id="uppercase"><i class="fas fa-circle"></i> One uppercase letter</li>
+                            <li class="invalid" id="lowercase"><i class="fas fa-circle"></i> One lowercase letter</li>
+                            <li class="invalid" id="number"><i class="fas fa-circle"></i> One number</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="Confirm your password">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <button type="submit" class="primary-btn">Create Account</button>
+            </form>
+            <div class="auth-links">
+                <p>Already have an account? <a href="login.html">Sign In</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const fullName = document.getElementById('fullName').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (password !== confirmPassword) {
+                alert('Passwords do not match!');
+                return;
+            }
+            
+            // Here you would typically make an API call to your backend
+            console.log('Registration attempt:', { fullName, email, password });
+            // For now, we'll just redirect to the login page
+            window.location.href = 'login.html';
+        });
+
+        // Password validation
+        const password = document.getElementById('password');
+        const requirements = {
+            length: document.getElementById('length'),
+            uppercase: document.getElementById('uppercase'),
+            lowercase: document.getElementById('lowercase'),
+            number: document.getElementById('number')
+        };
+
+        password.addEventListener('input', function() {
+            const value = this.value;
+            
+            // Check length
+            if (value.length >= 8) {
+                requirements.length.classList.remove('invalid');
+                requirements.length.classList.add('valid');
+                requirements.length.querySelector('i').className = 'fas fa-check-circle';
+            } else {
+                requirements.length.classList.remove('valid');
+                requirements.length.classList.add('invalid');
+                requirements.length.querySelector('i').className = 'fas fa-circle';
+            }
+
+            // Check uppercase
+            if (/[A-Z]/.test(value)) {
+                requirements.uppercase.classList.remove('invalid');
+                requirements.uppercase.classList.add('valid');
+                requirements.uppercase.querySelector('i').className = 'fas fa-check-circle';
+            } else {
+                requirements.uppercase.classList.remove('valid');
+                requirements.uppercase.classList.add('invalid');
+                requirements.uppercase.querySelector('i').className = 'fas fa-circle';
+            }
+
+            // Check lowercase
+            if (/[a-z]/.test(value)) {
+                requirements.lowercase.classList.remove('invalid');
+                requirements.lowercase.classList.add('valid');
+                requirements.lowercase.querySelector('i').className = 'fas fa-check-circle';
+            } else {
+                requirements.lowercase.classList.remove('valid');
+                requirements.lowercase.classList.add('invalid');
+                requirements.lowercase.querySelector('i').className = 'fas fa-circle';
+            }
+
+            // Check number
+            if (/[0-9]/.test(value)) {
+                requirements.number.classList.remove('invalid');
+                requirements.number.classList.add('valid');
+                requirements.number.querySelector('i').className = 'fas fa-check-circle';
+            } else {
+                requirements.number.classList.remove('valid');
+                requirements.number.classList.add('invalid');
+                requirements.number.querySelector('i').className = 'fas fa-circle';
+            }
+        });
+    </script>
+</body>
+</html> 
