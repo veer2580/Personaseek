@@ -1,0 +1,2615 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Web Experience</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .login-btn {
+            background: linear-gradient(45deg, var(--primary-btn), #fcd142);
+            color: #fff;
+            padding: 0.5rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-left: 1rem;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(244, 190, 19, 0.3);
+        }
+
+        .login-btn i {
+            margin-right: 0.5rem;
+        }
+
+        /* Dark mode specific styles */
+        [data-theme="dark"] {
+            --primary-color: #1a1a1a;
+            --secondary-color: #ffffff;
+            --hover-color: #2d2d2d;
+            --dropdown-bg: #2d2d2d;
+            --text-color: #ffffff;
+            --header-bg: #1a1a1a;
+            --header-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
+            --gradient-start: #ff6b6b;
+            --gradient-end: #4ecdc4;
+            /* New dark mode section backgrounds */
+            --section-bg-light-dark: #1a1a1a;
+            --section-bg-dark-dark: #2d2d2d;
+            --border-color-dark: #3a3a3a;
+            /* Subtle border color for dark mode */
+        }
+
+        [data-theme="dark"] body {
+            background-color: var(--primary-color);
+        }
+
+        /* Apply alternating dark mode backgrounds to sections */
+        [data-theme="dark"] .main-content,
+        [data-theme="dark"] .professional-brand-section,
+        [data-theme="dark"] .founders-section,
+        [data-theme="dark"] .businessroom-section,
+        [data-theme="dark"] .community-section,
+        [data-theme="dark"] .about-section,
+        [data-theme="dark"] .fast-track-section {
+            background-color: var(--section-bg-light-dark);
+            border-top: none;
+            /* Ensure no border on the primary dark sections */
+        }
+
+        [data-theme="dark"] .social-media-offerings-section,
+        [data-theme="dark"] .connect-collaborate-section,
+        [data-theme="dark"] .influencers-section,
+        [data-theme="dark"] .get-funding-section,
+        [data-theme="dark"] .reels-section,
+        [data-theme="dark"] .vision-section {
+            background-color: var(--section-bg-dark-dark);
+            border-top: 1px solid var(--border-color-dark);
+            /* Border on secondary dark sections */
+        }
+
+        /* Remove redundant dark mode section background declarations */
+        [data-theme="dark"] .social-media,
+        [data-theme="dark"] .co-founders-section,
+        [data-theme="dark"] .acquire-startup-section {
+            background: none;
+            /* Let the general section styles apply */
+        }
+
+        /* Ensure specific components still get their intended dark mode background */
+        [data-theme="dark"] .profile-card-main,
+        [data-theme="dark"] .social-card,
+        [data-theme="dark"] .founders-right-chat-simulation,
+        [data-theme="dark"] .businessroom-left-card,
+        [data-theme="dark"] .co-founders-right-card,
+        [data-theme="dark"] .acquire-startup-left-card,
+        [data-theme="dark"] .community-right-card {
+            background: var(--hover-color);
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+        }
+
+        [data-theme="dark"] .social-icon-container {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        [data-theme="dark"] .social-icon-container i {
+            color: var(--primary-btn);
+        }
+
+        [data-theme="dark"] .chat-body {
+            background: var(--hover-color);
+        }
+
+        [data-theme="dark"] .message.incoming p {
+            background: var(--dropdown-bg);
+            color: var(--text-color);
+        }
+
+        [data-theme="dark"] .message.outgoing .message-text {
+            background: var(--primary-btn);
+            color: var(--text-color);
+        }
+
+        [data-theme="dark"] .list-item-icon-container {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        [data-theme="dark"] .list-item-icon-container i {
+            color: var(--primary-btn);
+        }
+
+        [data-theme="dark"] .team-member {
+            background: var(--hover-color);
+        }
+
+        [data-theme="dark"] .team-member h4,
+        [data-theme="dark"] .team-member p {
+            color: var(--text-color);
+        }
+
+        [data-theme="dark"] .about-stats {
+            background: var(--hover-color);
+        }
+
+        [data-theme="dark"] .stat-number {
+            color: var(--primary-btn);
+        }
+
+        [data-theme="dark"] .stat-label {
+            color: var(--text-color);
+        }
+
+        [data-theme="dark"] footer {
+            background: var(--header-bg);
+            color: var(--text-color);
+        }
+
+        [data-theme="dark"] .chat-footer {
+            background: var(--hover-color);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        [data-theme="dark"] .chat-header {
+            background: var(--primary-btn);
+        }
+
+        [data-theme="dark"] .live-indicator {
+            color: #ff4444;
+        }
+
+        [data-theme="dark"] .profile-title-main {
+            color: var(--primary-btn);
+        }
+
+        [data-theme="dark"] .profile-quote-main {
+            color: var(--text-color);
+        }
+
+        [data-theme="dark"] .section-subtitle {
+            color: var(--text-color);
+            opacity: 0.8;
+        }
+
+        [data-theme="dark"] .description {
+            color: var(--text-color);
+        }
+
+        [data-theme="dark"] .secondary-btn {
+            background: var(--hover-color);
+            color: var(--text-color);
+        }
+
+        [data-theme="dark"] .secondary-btn:hover {
+            background: var(--dropdown-bg);
+        }
+
+        /* Smooth transition for theme switching */
+        body {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .profile-card-main,
+        .social-card,
+        .founders-right-chat-simulation,
+        .businessroom-left-card,
+        .co-founders-right-card,
+        .acquire-startup-left-card,
+        .community-right-card,
+        .team-member,
+        .about-stats {
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Section Spacing and Background Colors */
+        .main-content,
+        .fast-track-section,
+        .social-media-offerings-section,
+        .professional-brand-section,
+        .connect-collaborate-section,
+        .founders-section,
+        .influencers-section,
+        .businessroom-section,
+        .get-funding-section,
+        .community-section,
+        .reels-section,
+        .about-section,
+        .vision-section {
+            padding: 4rem 2rem;
+            /* Consistent padding for all major sections */
+            margin-top: 0;
+            /* Prevent margin collapsing with previous section */
+        }
+
+        .fast-track-section {
+            background-color: #f8f9fa;
+            text-align: center;
+        }
+
+        .social-media-offerings-section {
+            background-color: #ffffff;
+            border-top: 1px solid #e0e0e0;
+            /* Subtle top border for separation */
+            text-align: center;
+        }
+
+        .professional-brand-section {
+            background-color: #f8f9fa;
+            text-align: center;
+        }
+
+        .connect-collaborate-section {
+            background-color: #ffffff;
+            border-top: 1px solid #e0e0e0;
+            /* Subtle top border for separation */
+            text-align: center;
+        }
+
+        .founders-section {
+            background-color: #f8f9fa;
+        }
+
+        .influencers-section {
+            background-color: #ffffff;
+            border-top: 1px solid #e0e0e0;
+            /* Subtle top border for separation */
+        }
+
+        .businessroom-section {
+            background-color: #f8f9fa;
+        }
+
+        .get-funding-section {
+            background-color: #ffffff;
+            border-top: 1px solid #e0e0e0;
+            /* Subtle top border for separation */
+        }
+
+        .community-section {
+            background-color: #f8f9fa;
+        }
+
+        .reels-section {
+            background-color: #ffffff;
+            border-top: 1px solid #e0e0e0;
+            /* Subtle top border for separation */
+        }
+
+        .about-section {
+            background-color: #f8f9fa;
+        }
+
+        .vision-section {
+            background-color: #ffffff;
+            border-top: 1px solid #e0e0e0;
+            /* Subtle top border for separation */
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Contact Section Styles - Keep separate if it has unique needs */
+        .contact-section {
+            padding: 2rem 1rem;
+            background-color: #f8f9fa;
+            position: relative;
+            overflow: hidden;
+            margin-top: 0;
+            /* Ensure no extra top margin */
+            border-top: 1px solid #e0e0e0;
+            /* Border for light mode contact section */
+        }
+
+        [data-theme="dark"] .contact-section {
+            background-color: var(--section-bg-dark-dark);
+            border-top: 1px solid var(--border-color-dark);
+        }
+
+        /* Original Contact Section Styles - to be reviewed and potentially merged */
+        /* Note: This block might be redundant or conflict with the general section styles above. */
+        /* I'm keeping it for now to avoid unexpected deletions, but a full review is recommended. */
+        .contact-section {
+            padding: 2rem 1rem;
+            background-color: #f8f9fa;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .contact-header .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(45deg, var(--primary-btn), #fcd142);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .contact-header .section-subtitle {
+            font-size: 0.9rem;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .contact-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.2rem;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            flex: 1;
+            min-width: 200px;
+            max-width: 250px;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            border-color: var(--primary-btn);
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            color: var(--primary-btn);
+            margin-bottom: 0.6rem;
+        }
+
+        .contact-card h3 {
+            margin-bottom: 0.4rem;
+            color: var(--text-color);
+            font-size: 1.1rem;
+        }
+
+        .contact-card p {
+            color: var(--text-color);
+            opacity: 0.9;
+            margin: 0.2rem 0;
+            font-size: 0.85rem;
+            line-height: 1.3;
+        }
+
+        .social-media-row {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .social-media-row h3 {
+            color: var(--text-color);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .social-link {
+            font-size: 1.4rem;
+            color: var(--text-color);
+            transition: all 0.3s ease;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .social-link:hover {
+            color: var(--primary-btn);
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Responsive styles for contact section */
+        @media (max-width: 768px) {
+            .contact-section {
+                padding: 1.5rem 1rem;
+            }
+
+            .contact-info {
+                gap: 0.8rem;
+                flex-wrap: wrap;
+            }
+
+            .contact-card {
+                min-width: 150px;
+                padding: 1rem;
+            }
+
+            .social-media-row {
+                padding: 0.8rem;
+            }
+
+            .social-links {
+                gap: 1rem;
+            }
+
+            .social-link {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+        }
+
+        /* Add these styles to your existing CSS */
+        .social-card {
+            position: relative;
+            overflow: hidden;
+            padding-top: 0;
+        }
+
+        .social-card-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 12px 12px 0 0;
+            margin-bottom: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .social-card:hover .social-card-image {
+            transform: scale(1.05);
+        }
+
+        .social-card .social-icon-container {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            z-index: 2;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 0.5rem;
+            border-radius: 50%;
+        }
+
+        .social-card h3 {
+            margin-top: 0.5rem;
+        }
+
+        .social-card p {
+            margin-top: 0.5rem;
+        }
+
+        /* Update existing social-card styles */
+        .social-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.2rem;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            flex: 1;
+            min-width: 200px;
+            max-width: 300px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .social-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            border-color: var(--primary-btn);
+        }
+
+        /* Add these new styles */
+        .founders-image {
+            width: 100%;
+            max-width: 500px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .businessroom-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .founders-section {
+            background-color: #f8f9fa;
+            padding: 4rem 2rem;
+        }
+
+        .businessroom-section {
+            background-color: #f8f9fa;
+            padding: 4rem 2rem;
+        }
+
+        .founders-content,
+        .businessroom-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .founders-left,
+        .businessroom-right {
+            flex: 1;
+        }
+
+        .founders-right-chat-simulation,
+        .businessroom-left-card {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Add these new styles */
+        .community-section {
+            background-color: #f8f9fa;
+            padding: 4rem 2rem;
+        }
+
+        .community-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .community-left {
+            flex: 1;
+        }
+
+        .community-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .community-feature {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .community-feature:hover {
+            transform: translateY(-5px);
+        }
+
+        .community-feature-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .community-feature h3 {
+            padding: 1rem;
+            margin: 0;
+            color: var(--text-color);
+        }
+
+        .community-feature p {
+            padding: 0 1rem 1rem;
+            margin: 0;
+            color: var(--text-color);
+            opacity: 0.8;
+        }
+
+        .community-right-card {
+            flex: 1;
+            background: transparent;
+            border: none;
+            padding: 0;
+            backdrop-filter: none;
+        }
+
+        .community-card-single {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .community-card-single:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .community-main-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 12px 12px 0 0;
+        }
+
+        .community-card-content {
+            padding: 1.5rem;
+            text-align: center;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .community-card-content h3 {
+            color: var(--text-color);
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .community-card-content p {
+            color: var(--text-color);
+            opacity: 0.8;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+        }
+
+        .community-card-content .btn {
+            margin-top: auto;
+        }
+
+        /* Reels Section Styles */
+        .reels-section {
+            padding: 4rem 2rem;
+            background-color: #ffffff;
+        }
+
+        .reels-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .reels-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .reel-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .reel-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .reel-preview {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+        }
+
+        .reel-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .reel-card:hover .reel-preview img {
+            transform: scale(1.05);
+        }
+
+        .reel-overlay {
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .reel-info {
+            padding: 1rem;
+        }
+
+        .reel-user {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .reel-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .reel-user span {
+            color: var(--text-color);
+            font-weight: 500;
+        }
+
+        .reel-info p {
+            color: var(--text-color);
+            opacity: 0.8;
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        /* Coming Soon Badge */
+        .reels-header .section-subtitle {
+            position: relative;
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(45deg, var(--primary-btn), #fcd142);
+            border-radius: 20px;
+            color: white;
+            font-weight: 500;
+            margin-top: 1rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .reels-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .reel-preview {
+                height: 300px;
+            }
+        }
+
+        /* Stories Section Styles */
+
+        .stories-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            margin-bottom: 2px;
+            padding: 0.5rem;
+            overflow-x: auto;
+            scrollbar-width: none;
+            /* Firefox */
+            -ms-overflow-style: none;
+            /* IE and Edge */
+            -webkit-overflow-scrolling: touch;
+            /* Smooth scrolling on iOS */
+        }
+
+        .stories-container::-webkit-scrollbar {
+            display: none;
+            /* Chrome, Safari, Opera */
+        }
+
+        .story-item {
+            flex: 0 0 auto;
+            text-align: center;
+        }
+
+        .story-avatar {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            padding: 3px;
+            background: linear-gradient(45deg, var(--primary-btn), #fcd142);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .story-avatar:hover {
+            transform: scale(1.05);
+        }
+
+        .story-avatar img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary-color);
+        }
+
+        .story-avatar span {
+            display: block;
+            margin-top: 0.5rem;
+            color: var(--text-color);
+            font-size: 0.8rem;
+            white-space: nowrap;
+        }
+
+        @media (max-width: 768px) {
+            .stories-container {
+                gap: 1rem;
+            }
+
+            .story-avatar {
+                width: 60px;
+                height: 60px;
+            }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .community-content {
+                flex-direction: column;
+            }
+
+            .community-card-single {
+                width: 100%;
+                max-width: none;
+            }
+
+            .community-main-image {
+                height: 250px;
+            }
+        }
+
+        /* New Section: Social Media Offerings */
+        .social-media-offerings-section {
+            padding: 4rem 2rem;
+            background-color: #ffffff;
+            text-align: center;
+        }
+
+        .social-offerings-header {
+            margin-bottom: 3rem;
+        }
+
+        .social-offerings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .social-offering-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .social-offering-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .social-offering-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 12px 12px 0 0;
+        }
+
+        .social-offering-card h3 {
+            color: var(--text-color);
+            font-size: 1.3rem;
+            margin: 1.5rem 1.5rem 0.8rem;
+        }
+
+        .social-offering-card p {
+            color: var(--text-color);
+            opacity: 0.8;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            padding: 0 1.5rem 1.5rem;
+            flex-grow: 1;
+        }
+
+        @media (max-width: 768px) {
+            .social-offerings-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Fast-Track Section Styles */
+        .fast-track-section {
+            padding: 4rem 2rem;
+            background-color: #f8f9fa;
+            text-align: center;
+        }
+
+        .section-header {
+            margin-bottom: 3rem;
+        }
+
+        .fast-track-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .fast-track-card {
+            background: rgba(255, 255, 255, 0.1);
+            /* Slightly more opaque background */
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .fast-track-card:hover {
+            transform: translateY(-8px);
+            /* More pronounced lift */
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+            /* Stronger shadow */
+            border-color: var(--primary-btn);
+            /* Highlight border on hover */
+        }
+
+        .fast-track-icon-container {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary-btn), #fcd142);
+            /* Gradient background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .fast-track-card:hover .fast-track-icon-container {
+            transform: scale(1.1);
+            /* Slightly enlarge icon on hover */
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .fast-track-icon-container i {
+            font-size: 2rem;
+            color: white;
+        }
+
+        .fast-track-card h3 {
+            color: var(--text-color);
+            font-size: 1.4rem;
+            /* Slightly larger heading */
+            margin: 0 0 0.6rem;
+        }
+
+        .fast-track-card p {
+            color: var(--text-color);
+            opacity: 0.9;
+            /* Slightly less opaque description */
+            font-size: 0.95rem;
+            /* Slightly larger description */
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        @media (max-width: 768px) {
+            .fast-track-card {
+                padding: 1rem;
+            }
+
+            .fast-track-icon-container {
+                width: 60px;
+                height: 60px;
+            }
+
+            .fast-track-icon-container i {
+                font-size: 1.8rem;
+            }
+
+            .fast-track-card h3 {
+                font-size: 1.2rem;
+            }
+
+            .fast-track-card p {
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Professional Brand Section Styles */
+        .professional-brand-section {
+            padding: 4rem 2rem;
+            background-color: #f8f9fa;
+            text-align: center;
+        }
+
+        .professional-brand-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .brand-image-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            height: 100%;
+            min-height: 400px;
+        }
+
+        .brand-image-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .brand-main-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .brand-image-container:hover .brand-main-image {
+            transform: scale(1.05);
+        }
+
+        .brand-image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7));
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 2rem;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .brand-image-overlay:hover {
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.8));
+        }
+
+        .overlay-content {
+            text-align: left;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .brand-image-container:hover .overlay-content {
+            transform: translateY(0);
+        }
+
+        .overlay-content i {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-btn);
+        }
+
+        .overlay-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .overlay-content p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 1024px) {
+            .professional-brand-content {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .brand-image-container {
+                grid-column: 1 / -1;
+                min-height: 300px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .professional-brand-content {
+                grid-template-columns: 1fr;
+            }
+
+            .brand-image-container {
+                min-height: 250px;
+            }
+
+            .overlay-content h3 {
+                font-size: 1.5rem;
+            }
+
+            .overlay-content p {
+                font-size: 1rem;
+            }
+        }
+
+        .profile-preview-card {
+            background: #ffffff;
+            /* Solid white background for light mode */
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            text-align: left;
+            flex: 1;
+            min-width: 300px;
+            max-width: 500px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            /* Stronger shadow */
+            transition: all 0.3s ease;
+        }
+
+        .profile-preview-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .profile-header-brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .avatar-image-brand {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary-btn);
+            /* Add a subtle border */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            /* Add a subtle shadow */
+        }
+
+        .profile-info-brand h4 {
+            color: var(--text-color);
+            /* Ensure text color adapts to theme */
+            margin: 0;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .profile-info-brand h4 .fa-circle-check {
+            color: #28a745;
+            /* Green color for verified badge */
+            font-size: 1rem;
+        }
+
+        .profile-info-brand p {
+            color: var(--text-color);
+            opacity: 0.7;
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        .image-placeholders {
+            display: flex;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .img-placeholder {
+            width: 100px;
+            height: 80px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.2));
+            /* Subtle gradient */
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .profile-preview-card:hover .img-placeholder {
+            transform: translateY(-3px);
+        }
+
+        .latest-update {
+            color: var(--text-color);
+            opacity: 0.9;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .features-list-brand {
+            flex: 1;
+            min-width: 300px;
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            text-align: left;
+        }
+
+        .feature-item-brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            /* Slightly transparent background for each feature item */
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .feature-item-brand:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary-btn);
+            /* Highlight border on hover */
+        }
+
+        .icon-brand {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .feature-item-brand:hover .icon-brand {
+            transform: scale(1.1);
+        }
+
+        .icon-brand.blue {
+            background: linear-gradient(45deg, #2575fc, #6a11cb);
+            /* Gradient for blue icon */
+        }
+
+        .icon-brand.orange {
+            background: linear-gradient(45deg, #ff8c00, #ffc837);
+            /* Gradient for orange icon */
+        }
+
+        .icon-brand.green {
+            background: linear-gradient(45deg, #4CAF50, #8bc34a);
+            /* Gradient for green icon */
+        }
+
+        .text-brand h4 {
+            color: var(--text-color);
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .text-brand p {
+            color: var(--text-color);
+            opacity: 0.8;
+            margin: 0;
+            font-size: 0.85rem;
+        }
+
+        /* Connect. Collaborate. Grow. Section Styles */
+        .connect-collaborate-section {
+            padding: 4rem 2rem;
+            background-color: #ffffff;
+            text-align: center;
+        }
+
+        .connect-collaborate-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .connect-collaborate-card {
+            background: rgba(255, 255, 255, 0.1);
+            /* Slightly more opaque background */
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .connect-collaborate-card:hover {
+            transform: translateY(-8px);
+            /* More pronounced lift */
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+            /* Stronger shadow */
+            border-color: var(--primary-btn);
+            /* Highlight border on hover */
+        }
+
+        .cc-icon-container {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.8rem;
+            color: white;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .connect-collaborate-card:hover .cc-icon-container {
+            transform: scale(1.1);
+            /* Slightly enlarge icon on hover */
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .cc-icon-container.blue {
+            background: linear-gradient(45deg, #2575fc, #6a11cb);
+            /* Gradient for blue icon */
+        }
+
+        .cc-icon-container.yellow {
+            background: linear-gradient(45deg, #ffcc00, #ffeb3b);
+            /* Gradient for yellow icon */
+        }
+
+        .cc-icon-container.purple {
+            background: linear-gradient(45deg, #8e44ad, #9b59b6);
+            /* Gradient for purple icon */
+        }
+
+        .cc-icon-container.green {
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
+            /* Gradient for green icon */
+        }
+
+        .cc-icon-container.red {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            /* Gradient for red icon */
+        }
+
+        .cc-icon-container.orange {
+            background: linear-gradient(45deg, #f39c12, #e67e22);
+            /* Gradient for orange icon */
+        }
+
+        .connect-collaborate-card h3 {
+            color: var(--text-color);
+            font-size: 1.3rem;
+            /* Slightly larger heading */
+            margin: 0 0 0.6rem;
+        }
+
+        .connect-collaborate-card p {
+            color: var(--text-color);
+            opacity: 0.9;
+            /* Slightly less opaque description */
+            font-size: 0.95rem;
+            /* Slightly larger description */
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        @media (max-width: 768px) {
+            .connect-collaborate-card {
+                padding: 1rem;
+            }
+
+            .cc-icon-container {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+
+            .connect-collaborate-card h3 {
+                font-size: 1.1rem;
+            }
+
+            .connect-collaborate-card p {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .professional-brand-content {
+                grid-template-columns: 1fr;
+            }
+
+            .brand-image-container {
+                min-height: 250px;
+            }
+
+            .overlay-content h3 {
+                font-size: 1.5rem;
+            }
+
+            .overlay-content p {
+                font-size: 1rem;
+            }
+        }
+
+        [data-theme="dark"] .community-right-card {
+            background: transparent;
+            border: none;
+            padding: 0;
+            backdrop-filter: none;
+        }
+
+        [data-theme="dark"] .profile-preview-card {
+            background: var(--hover-color);
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+        }
+
+        .vision-section {
+            padding: 6rem 2rem;
+            background-color: #ffffff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .vision-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .vision-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .vision-header .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .vision-header .section-subtitle {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        .vision-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .vision-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .vision-card.highlight {
+            background: linear-gradient(45deg, var(--primary-btn), #fcd142);
+            transform: scale(1.05);
+        }
+
+        .vision-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .vision-icon-container {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: var(--primary-btn);
+        }
+
+        .vision-card.highlight .vision-icon-container {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        .vision-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        .vision-card p {
+            color: var(--text-color);
+            opacity: 0.9;
+        }
+
+        .problem-statement {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 3rem;
+            text-align: center;
+            margin-bottom: 4rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .problem-icon {
+            font-size: 3rem;
+            color: #ff4444;
+            margin-bottom: 1.5rem;
+        }
+
+        .problem-statement h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+        }
+
+        .stat-highlight {
+            font-size: 1.4rem;
+            color: var(--primary-btn);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .solution-showcase {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .solution-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .solution-features {
+            list-style: none;
+            padding: 0;
+            margin-top: 2rem;
+        }
+
+        .solution-features li {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            color: var(--text-color);
+        }
+
+        .solution-features i {
+            color: var(--primary-btn);
+            font-size: 1.5rem;
+        }
+
+        .solution-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .vision-header .section-title {
+                font-size: 2rem;
+            }
+
+            .solution-showcase {
+                grid-template-columns: 1fr;
+            }
+
+            .solution-image {
+                order: -1;
+            }
+
+            .solution-image img {
+                height: 300px;
+            }
+        }
+
+        /* Add animation keyframes */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .vision-header {
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .vision-card {
+            animation: fadeInUp 1s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .vision-card:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+
+        .vision-card:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+
+        .vision-card:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
+        .problem-statement {
+            animation: fadeInUp 1s ease-out;
+            animation-delay: 0.8s;
+            animation-fill-mode: both;
+        }
+
+        .problem-icon {
+            animation: pulse 2s infinite;
+        }
+
+        .solution-content {
+            animation: fadeInUp 1s ease-out;
+            animation-delay: 1s;
+            animation-fill-mode: both;
+        }
+
+        .solution-image {
+            animation: fadeInUp 1s ease-out;
+            animation-delay: 1.2s;
+            animation-fill-mode: both;
+        }
+
+        .solution-features li {
+            animation: fadeInUp 1s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .solution-features li:nth-child(1) {
+            animation-delay: 1.4s;
+        }
+
+        .solution-features li:nth-child(2) {
+            animation-delay: 1.6s;
+        }
+
+        .solution-features li:nth-child(3) {
+            animation-delay: 1.8s;
+        }
+
+        /* New styles for Main Content Callout Section */
+        .callout-section {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            animation: fadeInUp 1s ease-out 0.8s forwards;
+        }
+
+        .callout-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: var(--text-color);
+            font-weight: 700;
+        }
+
+        .callout-subtitle {
+            font-size: 0.95rem;
+            color: var(--text-color);
+            opacity: 0.8;
+            margin-bottom: 1.5rem;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .callout-features-list {
+            list-style: none;
+
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.8rem;
+        }
+
+        .callout-features-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            color: var(--text-color);
+            font-size: 0.9rem;
+            text-align: left;
+        }
+
+        .callout-features-list li i {
+            color: var(--primary-btn);
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .callout-section {
+                padding: 1rem;
+            }
+
+            .callout-title {
+                font-size: 1.3rem;
+            }
+
+            .callout-subtitle {
+                font-size: 0.85rem;
+            }
+
+            .callout-features-list {
+                grid-template-columns: 1fr;
+            }
+
+            .callout-features-list li {
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Dark mode adjustments for callout section */
+        [data-theme="dark"] .callout-section {
+            background: var(--hover-color);
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="logo-container">
+            <div class="logo">
+                <img src="logo.png" alt="Logo">
+            </div>
+        </div>
+        <nav class="nav">
+            <ul class="nav-list">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="login.html" class="login-btn"><i class="fas fa-sign-in-alt"></i>Login</a></li>
+            </ul>
+        </nav>
+        <div class="theme-toggle">
+            <i class="fas fa-moon"></i>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="content-left">
+            <h1 class="gradient-text">Celebso</h1>
+            <h2>India’s first platform where creators become icons, and builders become brands</h2>
+            <p class="description">Celebso isn't just another platform. It's a movement to make India's creators,
+                founders, and freelancers visible, valued, and unstoppable.</p>
+            <div class="buttons">
+                <button class="btn primary-btn">Get Started</button>
+                <button class="btn secondary-btn">Learn More</button>
+            </div>
+            <div class="rating-section">
+                <div class="people-images">
+                    <img src="https://i.pravatar.cc/150?img=45" alt="Person 1" class="person-image">
+                    <img src="https://i.pravatar.cc/150?img=46" alt="Person 2" class="person-image">
+                    <img src="https://i.pravatar.cc/150?img=47" alt="Person 3" class="person-image">
+                </div>
+                <p class="rating-text">5.0 Star Rating</p>
+            </div>
+        </div>
+        <div class="content-right">
+            <div class="profile-card-main">
+                <img src="https://i.pravatar.cc/150?img=31" alt="Profile Picture" class="profile-image-main">
+                <h4>Steve Smith</h4>
+                <p class="profile-title-main">Founder</p>
+                <p class="profile-quote-main">"Hi, I'm raising funds for my startup."</p>
+            </div>
+
+            <div class="profile-card-main">
+                <img src="https://i.pravatar.cc/150?img=32" alt="Profile Picture" class="profile-image-main">
+                <h4>Daniel Okaya</h4>
+                <p class="profile-title-main">Investor</p>
+                <p class="profile-quote-main">"Hi, Let's discuss more."</p>
+            </div>
+
+            <div class="profile-card-main">
+                <img src="https://i.pravatar.cc/150?img=33" alt="Profile Picture" class="profile-image-main">
+                <h4>Jane Doe</h4>
+                <p class="profile-title-main">Advisor</p>
+                <p class="profile-quote-main">"Happy to help young entrepreneurs."</p>
+            </div>
+        </div>
+    </main>
+
+    <section class="fast-track-section">
+        <div class="section-header">
+            <h2 class="section-title">Fast-Track Your <span class="gradient-text">Access</span></h2>
+            <p class="section-subtitle">Get identity verified in just 24 hours and unlock exclusive features</p>
+        </div>
+        <div class="fast-track-grid">
+            <div class="fast-track-card">
+                <div class="fast-track-icon-container">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Secure Verification</h3>
+                <p>Bank-grade security for your identity verification process</p>
+            </div>
+            <div class="fast-track-card">
+                <div class="fast-track-icon-container">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <h3>24-Hour Process</h3>
+                <p>Lightning-fast verification without compromising security</p>
+            </div>
+            <div class="fast-track-card">
+                <div class="fast-track-icon-container">
+                    <i class="fas fa-star"></i>
+                </div>
+                <h3>Trusted Network</h3>
+                <p>Join a community of verified professionals and creators</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="vision-section">
+        <div class="vision-content">
+            <div class="vision-header">
+                <h2 class="section-title">India Has <span class="gradient-text">100M+ Dreamers</span> — But No Real
+                    Stage</h2>
+                <p class="section-subtitle">Every day, millions of creators, founders, freelancers, and visionaries are
+                    building their identity. But they're invisible.</p>
+            </div>
+
+            <div class="vision-grid">
+                <div class="vision-card">
+                    <div class="vision-icon-container">
+                        <i class="fas fa-camera-retro"></i>
+                    </div>
+                    <h3>Image-Centric Platforms</h3>
+                    <p>Aesthetics often overshadow real work</p>
+                </div>
+
+                <div class="vision-card">
+                    <div class="vision-icon-container">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h3>Traditional Professional Networks</h3>
+                    <p>Job titles prioritize over true innovation</p>
+                </div>
+
+                <div class="vision-card highlight">
+                    <div class="vision-icon-container">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>Celebso</h3>
+                    <p>Where real work and impact take center stage</p>
+                </div>
+            </div>
+
+            <div class="problem-statement">
+                <div class="problem-icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <h3>The Problem Is Urgent</h3>
+                <p class="stat-highlight">95% of early-stage talent in India fails — not because they lack skill, but
+                    because they lack visibility.</p>
+                <p>They're not supported. They're not discovered. They're building in silence, with no audience and no
+                    recognition.</p>
+            </div>
+
+            <div class="solution-showcase">
+                <div class="solution-content">
+                    <h2>That's Why We Built <span class="gradient-text">Celebso</span></h2>
+                    <p>A stage for the doers, builders, and future legends.</p>
+                    <ul class="solution-features">
+                        <li>
+                            <i class="fas fa-bullhorn"></i>
+                            <span>We make sure your work speaks louder than your profile</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-star"></i>
+                            <span>We turn influencers into icons, and builders into brands</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-chart-line"></i>
+                            <span>It's not about followers. It's about impact</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="solution-image">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YnVzaW5lc3MlMjBtZWV0aW5nfGVufDB8fDB8fHww"
+                        alt="Building the Future">
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="social-media-offerings-section">
+        <div class="social-offerings-header">
+            <h2 class="section-title">Connect & Grow with <span class="gradient-text">Celebso Social</span></h2>
+            <p class="section-subtitle">Leverage our social media features to amplify your presence and achieve your
+                goals.</p>
+        </div>
+        <div class="social-offerings-grid">
+            <div class="social-offering-card">
+                <img src="img/Como-ser-influencer-GUIA-COMPLETA-1140x761.jpg" alt="Social Interaction"
+                    class="social-offering-image">
+                <h3>For Founders: Build Your Brand</h3>
+                <p>Showcase your startup, share updates, and connect with potential investors and talent in an engaging
+                    social environment.</p>
+            </div>
+            <div class="social-offering-card">
+                <img src="img/customer-experience-creative-collage.jpg" alt="Influencer Marketing"
+                    class="social-offering-image">
+                <h3>For Influencers: Expand Your Reach</h3>
+                <p>Discover exciting collaboration opportunities, promote innovative products, and grow your audience
+                    through our platform's unique features.</p>
+            </div>
+            <div class="social-offering-card">
+                <img src="img/Influencer-marketing-in-Hong-Kong-report-2021.jpg" alt="Community Connection"
+                    class="social-offering-image">
+                <h3>For the Community: Connect & Learn</h3>
+                <p>Engage with peers, share knowledge, and explore new ideas in a supportive and interactive social
+                    environment.</p>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="professional-brand-section">
+        <div class="section-header">
+            <h2 class="section-title">Your Professional Brand, <span class="gradient-text">Reimagined</span></h2>
+            <p class="section-subtitle">Combine the best of LinkedIn professionalism with Instagram's visual
+                storytelling</p>
+        </div>
+        <div class="professional-brand-content">
+            <div class="brand-image-container">
+                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YnVzaW5lc3MlMjBtZWV0aW5nfGVufDB8fDB8fHww"
+                    alt="Professional Brand" class="brand-main-image">
+                <div class="brand-image-overlay">
+                    <div class="overlay-content">
+                        <i class="fas fa-star"></i>
+                        <h3>Build Your Legacy</h3>
+                        <p>Where professionals become icons</p>
+                    </div>
+                </div>
+            </div>
+            <div class="profile-preview-card">
+                <div class="profile-header-brand">
+                    <img src="https://i.pravatar.cc/150?img=40" alt="Jane Doe Avatar" class="avatar-image-brand">
+                    <div class="profile-info-brand">
+                        <h4>Jane Doe <i class="fas fa-circle-check"></i></h4>
+                        <p>Founder & CEO at TechCorp</p>
+                    </div>
+                </div>
+                <div class="image-placeholders">
+                    <div class="img-placeholder"></div>
+                    <div class="img-placeholder"></div>
+                    <div class="img-placeholder"></div>
+                </div>
+                <p class="latest-update">Latest: Excited to announce our Series A funding round! 🚀</p>
+            </div>
+            <div class="features-list-brand">
+                <div class="feature-item-brand">
+                    <div class="icon-brand blue"><i class="fas fa-shield-alt"></i></div>
+                    <div class="text-brand">
+                        <h4>Verified Badge</h4>
+                        <p>Stand out with your verified status</p>
+                    </div>
+                </div>
+                <div class="feature-item-brand">
+                    <div class="icon-brand orange"><i class="fas fa-clock"></i></div>
+                    <div class="text-brand">
+                        <h4>Visual Storytelling</h4>
+                        <p>Share your journey through photos and videos</p>
+                    </div>
+                </div>
+                <div class="feature-item-brand">
+                    <div class="icon-brand green"><i class="fas fa-chart-line"></i></div>
+                    <div class="text-brand">
+                        <h4>Career Growth</h4>
+                        <p>Track and showcase your professional milestones</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="connect-collaborate-section">
+        <div class="section-header">
+            <h2 class="section-title"><span class="gradient-text">Connect. Collaborate.</span> Grow.</h2>
+            <p class="section-subtitle">Everything you need to build your professional brand and network</p>
+        </div>
+        <div class="connect-collaborate-grid">
+            <div class="connect-collaborate-card">
+                <div class="cc-icon-container blue"><i class="fas fa-users"></i></div>
+                <h3>Verified Network</h3>
+                <p>Connect with verified professionals and creators you can trust</p>
+            </div>
+            <div class="connect-collaborate-card">
+                <div class="cc-icon-container yellow"><i class="fas fa-chart-line"></i></div>
+                <h3>Career Boost Tools</h3>
+                <p>Access tools and insights to accelerate your career growth</p>
+            </div>
+            <div class="connect-collaborate-card">
+                <div class="cc-icon-container purple"><i class="fas fa-star"></i></div>
+                <h3>Celebrity Pathway</h3>
+                <p>Transform your influence into celebrity status within your industry</p>
+            </div>
+            <div class="connect-collaborate-card">
+                <div class="cc-icon-container green"><i class="fas fa-briefcase"></i></div>
+                <h3>Project Showcase</h3>
+                <p>Display your best work and attract potential collaborators</p>
+            </div>
+            <div class="connect-collaborate-card">
+                <div class="cc-icon-container red"><i class="fas fa-rocket"></i></div>
+                <h3>Investor Matchmaking</h3>
+                <p>Connect founders with the right investors for their ventures</p>
+            </div>
+            <div class="connect-collaborate-card">
+                <div class="cc-icon-container orange"><i class="fas fa-camera"></i></div>
+                <h3>Content Studio</h3>
+                <p>Create, edit, and share professional content that engages your audience</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="founders-section">
+        <div class="founders-content">
+            <div class="founders-left">
+                <h2 class="section-title">Connect with <span class="gradient-text">Startup Founders</span></h2>
+                <p class="section-subtitle">Join our vibrant community of entrepreneurs and innovators. Share ideas,
+                    find co-founders, and grow your network.</p>
+                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8dGVhbSUyMG1lZXRpbmd8ZW58MHx8MHx8fDA%3D"
+                    alt="Startup Team" class="founders-image">
+                <ul class="founders-list">
+                    <li>
+                        <div class="list-item-icon-container">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <div class="list-item-text">
+                            <h3>Share Ideas</h3>
+                            <p>Get feedback and insights from experienced founders</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="list-item-icon-container">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <div class="list-item-text">
+                            <h3>Find Co-founders</h3>
+                            <p>Connect with like-minded entrepreneurs</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="list-item-icon-container">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <div class="list-item-text">
+                            <h3>Grow Together</h3>
+                            <p>Learn and evolve with your peers</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="founders-right-chat-simulation">
+                <div class="chat-header">
+                    <img src="https://i.pravatar.cc/150?img=45" alt="User Avatar" class="chat-avatar">
+                    <div class="chat-info">
+                        <h4>Startup Founders</h4>
+                        <p>Active Now</p>
+                    </div>
+                </div>
+                <div class="chat-body">
+                    <div class="message incoming">
+                        <img src="https://i.pravatar.cc/150?img=25" alt="User Avatar" class="chat-avatar">
+                        <p>Looking for a technical co-founder for my AI startup. Anyone interested?</p>
+                    </div>
+                    <div class="message incoming">
+                        <img src="https://i.pravatar.cc/150?img=26" alt="User Avatar" class="chat-avatar">
+                        <p>Just launched our MVP! Check it out and let me know your thoughts.</p>
+                    </div>
+                    <div class="message outgoing">
+                        <div class="message-text">
+                            <p>I'm interested in the AI startup. Can we discuss more?</p>
+                        </div>
+                        <img src="https://i.pravatar.cc/150?img=45" alt="User Avatar" class="chat-avatar">
+                    </div>
+                    <div class="message outgoing">
+                        <div class="message-text">
+                            <p>Great! Let's schedule a call to discuss the details.</p>
+                        </div>
+                        <img src="https://i.pravatar.cc/150?img=45" alt="User Avatar" class="chat-avatar">
+                    </div>
+                </div>
+                <div class="chat-footer">
+                    <!-- Input area simulation -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="influencers-section">
+        <div class="influencers-content">
+            <div class="influencers-left-chat-simulation">
+                <div class="chat-header">
+                    <img src="https://i.pravatar.cc/150?img=35" alt="User Avatar" class="chat-avatar">
+                    <div class="chat-info">
+                        <h4>creators Network</h4>
+                        <p>Active Now</p>
+                    </div>
+                </div>
+                <div class="chat-body">
+                    <div class="message incoming">
+                        <img src="https://i.pravatar.cc/150?img=36" alt="User Avatar" class="chat-avatar">
+                        <p>Looking for brand collaborations in the tech space. Any startups interested?</p>
+                    </div>
+                    <div class="message incoming">
+                        <img src="https://i.pravatar.cc/150?img=37" alt="User Avatar" class="chat-avatar">
+                        <p>Just hit 100K followers! Ready to promote innovative products.</p>
+                    </div>
+                    <div class="message outgoing">
+                        <div class="message-text">
+                            <p>We have a new AI product launching soon. Would love to collaborate!</p>
+                        </div>
+                        <img src="https://i.pravatar.cc/150?img=35" alt="User Avatar" class="chat-avatar">
+                    </div>
+                    <div class="message outgoing">
+                        <div class="message-text">
+                            <p>Perfect! Let's discuss the partnership details.</p>
+                        </div>
+                        <img src="https://i.pravatar.cc/150?img=35" alt="User Avatar" class="chat-avatar">
+                    </div>
+                </div>
+                <div class="chat-footer">
+                    <!-- Input area simulation -->
+                </div>
+            </div>
+
+            <div class="influencers-right">
+                <h2 class="section-title">Connect with <span class="gradient-text">Creators</span></h2>
+                <p class="section-subtitle">Partner with influential voices to amplify your brand and reach new
+                    audiences.</p>
+
+                <ul class="influencers-list">
+                    <li>
+                        <div class="list-item-icon-container">
+                            <i class="fas fa-bullhorn"></i>
+                        </div>
+                        <div class="list-item-text">
+                            <h3>Brand Collaborations</h3>
+                            <p>Find the perfect influencers to promote your products</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="list-item-icon-container">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="list-item-text">
+                            <h3>Track Performance</h3>
+                            <p>Monitor campaign success with detailed analytics</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="list-item-icon-container">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <div class="list-item-text">
+                            <h3>Build Relationships</h3>
+                            <p>Create long-term partnerships with trusted creators</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="businessroom-section">
+        <div class="businessroom-content">
+            <div class="businessroom-left-card">
+                <div class="profile-header">
+                    <img src="https://i.pravatar.cc/150?img=22" alt="Profile Picture" class="profile-avatar">
+                    <div class="profile-info">
+                        <h4>John Wilson</h4>
+                        <p>Founder</p>
+                    </div>
+                </div>
+                <div class="live-indicator">
+                    <i class="fas fa-circle"></i> LIVE
+                </div>
+                <div class="card-content">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8YnVzaW5lc3MlMjBtZWV0aW5nfGVufDB8fDB8fHww"
+                        alt="Live Session" class="businessroom-image">
+                    <h3>Explore Business Ideas</h3>
+                    <p>Join me live at 10 PM Pacific Time today on Celebso, where I'll be showcasing my innovative
+                        AI Agentic Workforce project. Cheers!</p>
+                </div>
+            </div>
+
+            <div class="businessroom-right">
+                <h2 class="section-title"><span class="gradient-text">Celebso</span> Live</h2>
+                <p class="section-subtitle">Pitch your idea to a global community and build meaningful connections.</p>
+
+                <div class="side-by-side-images" style="display: flex; gap: 30px; margin-top: 40px; flex-wrap: wrap;">
+                    <img src="img/3697516.jpg" alt="Post 1"
+                        style="width: 100%; max-width: 300px; border-radius: 16px;">
+                    <img src="img/9964487.jpg" alt="Post 2"
+                        style="width: 100%; max-width: 300px; border-radius: 16px;">
+                </div>
+            
+            </div>
+        </div>
+    </section>
+
+
+    <section class="get-funding-section">
+        <div class="get-funding-content">
+            <div class="get-funding-left">
+                <h2 class="section-title">Get <span class="gradient-text">Funding</span></h2>
+                <p class="section-subtitle">Connect with investors and secure the capital you need to grow your startup.
+                </p>
+
+                <ul class="get-funding-list">
+                    <li>
+                        <div class="list-item-icon-container">
+                            <i class="fas fa-money-bill-wave"></i>
+                        </div>
+                        <div class="list-item-text">
+                            <h3>Access Investors</h3>
+                            <p>Browse a network of active investors looking for new opportunities.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="list-item-icon-container">
+                            <i class="fas fa-chart-pie"></i>
+                        </div>
+                        <div class="list-item-text">
+                            <h3>Pitch Your Idea</h3>
+                            <p>Present your startup idea to potential investors and get valuable feedback.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="list-item-icon-container">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <div class="list-item-text">
+                            <h3>Secure Deals</h3>
+                            <p>Negotiate and finalize funding rounds with interested investors.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="get-funding-right-card">
+                <img src="img/1684204483498.png" alt="Get Funding" class="get-funding-image">
+            </div>
+        </div>
+    </section>
+
+
+    <section class="community-section">
+        <div class="community-content">
+            <div class="community-left">
+                <h2 class="section-title"><span class="gradient-text">Celebso</span> Community</h2>
+                <p class="section-subtitle">Join a thriving community of entrepreneurs, investors, and mentors.</p>
+                <div class="community-features">
+                    <div class="community-feature">
+                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YnVzaW5lc3MlMjBtZWV0aW5nfGVufDB8fDB8fHww"
+                            alt="Networking" class="community-feature-image">
+                        <h3>Networking Events</h3>
+                        <p>Connect with like-minded professionals</p>
+                    </div>
+                    <div class="community-feature">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Y29ubmVjdGlvbnN8ZW58MHx8MHx8fDA%3D"
+                            alt="Mentorship" class="community-feature-image">
+                        <h3>Mentorship</h3>
+                        <p>Learn from experienced entrepreneurs</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="community-right-card">
+                <div class="community-card-single">
+                    <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjZ8fGNvbW11bml0eXxlbnwwfHwwfHww"
+                        alt="Community Group" class="community-main-image">
+                    <div class="community-card-content">
+                        <h3>Join Our Thriving Community</h3>
+                        <p>Connect with a diverse group of entrepreneurs, investors, and mentors to grow your network
+                            and share insights.</p>
+                        <a href="#" class="btn primary-btn">Explore Community</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="reels-section">
+        <div class="reels-header">
+            <h2 class="section-title"><span class="gradient-text">Celebso</span> Reels</h2>
+            <p class="section-subtitle">Coming Soon: Share your entrepreneurial journey through short-form videos</p>
+        </div>
+        <div class="stories-container">
+            <div class="story-item">
+                <div class="story-avatar">
+                    <img src="https://i.pravatar.cc/150?img=31" alt="User Story">
+                    <span>@founder</span>
+                </div>
+            </div>
+            <div class="story-item">
+                <div class="story-avatar">
+                    <img src="https://i.pravatar.cc/150?img=32" alt="User Story">
+                    <span>@investor</span>
+                </div>
+            </div>
+            <div class="story-item">
+                <div class="story-avatar">
+                    <img src="https://i.pravatar.cc/150?img=33" alt="User Story">
+                    <span>@mentor</span>
+                </div>
+            </div>
+            <div class="story-item">
+                <div class="story-avatar">
+                    <img src="https://i.pravatar.cc/150?img=34" alt="User Story">
+                    <span>@startup</span>
+                </div>
+            </div>
+            <div class="story-item">
+                <div class="story-avatar">
+                    <img src="https://i.pravatar.cc/150?img=35" alt="User Story">
+                    <span>@entrepreneur</span>
+                </div>
+            </div>
+        </div>
+        <div class="reels-grid">
+            <div class="reel-card">
+                <div class="reel-preview">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YnVzaW5lc3MlMjBtZWV0aW5nfGVufDB8fDB8fHww"
+                        alt="Business Meeting Reel">
+                    <div class="reel-overlay">
+                        <i class="fas fa-play"></i>
+                        <span>0:30</span>
+                    </div>
+                </div>
+                <div class="reel-info">
+                    <div class="reel-user">
+                        <img src="https://i.pravatar.cc/150?img=31" alt="User" class="reel-avatar">
+                        <span>@startupfounder</span>
+                    </div>
+                    <p>Behind the scenes of our latest product launch! 🚀 #startuplife</p>
+                </div>
+            </div>
+            <div class="reel-card">
+                <div class="reel-preview">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Y29ubmVjdGlvbnN8ZW58MHx8MHx8fDA%3D"
+                        alt="Networking Reel">
+                    <div class="reel-overlay">
+                        <i class="fas fa-play"></i>
+                        <span>0:45</span>
+                    </div>
+                </div>
+                <div class="reel-info">
+                    <div class="reel-user">
+                        <img src="https://i.pravatar.cc/150?img=32" alt="User" class="reel-avatar">
+                        <span>@techinvestor</span>
+                    </div>
+                    <p>Networking tips for entrepreneurs! 💡 #businessgrowth</p>
+                </div>
+            </div>
+            <div class="reel-card">
+                <div class="reel-preview">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8YnVzaW5lc3MlMjBzYWxlfGVufDB8fDB8fHww"
+                        alt="Pitch Reel">
+                    <div class="reel-overlay">
+                        <i class="fas fa-play"></i>
+                        <span>0:35</span>
+                    </div>
+                </div>
+                <div class="reel-info">
+                    <div class="reel-user">
+                        <img src="https://i.pravatar.cc/150?img=33" alt="User" class="reel-avatar">
+                        <span>@pitchmaster</span>
+                    </div>
+                    <p>How to pitch your startup in 30 seconds! 🎯 #startuppitch</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="about-section" id="about">
+
+        <div class="about-content">
+            <div class="about-left">
+                <h1 class="section-title">About us</h1>
+                <p>Celebso is the world's first social media platform designed to seamlessly connect entrepreneurs,
+                    co-founders, and investors, creating a dynamic space where business ideas can evolve into successful
+                    ventures.
+                </p>
+                <ul class="about-features-list">
+                    <li>
+                        <div class="list-item-icon-container">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="list-item-text">
+                            Advanced search and filtering options
+                        </div>
+                    </li>
+                    <li>
+                        <div class="list-item-icon-container">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="list-item-text">
+                            Direct messaging functionality
+                        </div>
+                    </li>
+                    <li>
+                        <div class="list-item-icon-container">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="list-item-text">
+                            Profile customization tools
+                        </div>
+                    </li>
+                    <li>
+                        <div class="list-item-icon-container">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="list-item-text">
+                            Analytics and reporting features
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="about-right-grid">
+                <img src="about.webp" alt="About Us Image" class="about-image">
+            </div>
+        </div>
+    </section>
+
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <img src="white logo.webp" alt="Celebso Logo" class="footer-logo">
+                <p>Celebso is revolutionizing the way brands and influencers connect in the digital age. Our platform
+                    provides a seamless and efficient solution for forging meaningful partnerships that drive results.
+                </p>
+                <a href="#" class="btn primary-btn">Join Now</a>
+            </div>
+
+            <div class="footer-nav">
+                <h3>Navigations</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Features</a></li>
+                    <li><a href="#">Pricing</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-social">
+                <h3>Quick Links</h3>
+                <div class="social-icons-footer">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-contact">
+                <h3>Contact</h3>
+                <p>info@celebso.com</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2024 Celebso All Rights Reserved.</p>
+            <div class="footer-legal">
+                <a href="#">Terms of service</a>
+                <span>|</span>
+                <a href="#">Privacy Policy</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
